@@ -2,7 +2,6 @@ package br.com.pauloviniciius.SpringData.service;
 
 import br.com.pauloviniciius.SpringData.orm.Cargo;
 import br.com.pauloviniciius.SpringData.repository.CargoRepository;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

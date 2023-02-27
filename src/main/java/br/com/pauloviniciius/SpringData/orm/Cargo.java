@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,6 +16,8 @@ public class Cargo{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String descricao;
+    @OneToMany(mappedBy = "cargo")
+    private List<Funcionario> funcionario;
 
     @Override
     public String toString(){
