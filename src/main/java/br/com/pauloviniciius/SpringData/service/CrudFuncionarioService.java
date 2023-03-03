@@ -6,6 +6,7 @@ import br.com.pauloviniciius.SpringData.orm.UnidadeTrabalho;
 import br.com.pauloviniciius.SpringData.repository.CargoRepository;
 import br.com.pauloviniciius.SpringData.repository.FuncionarioRepository;
 import br.com.pauloviniciius.SpringData.repository.UnidadeTrabalhoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,24 +19,31 @@ import java.util.Scanner;
 @Service
 public class CrudFuncionarioService {
 
+	private final CrudCargoService crudCargoService;
 	private Boolean system = true;
 	private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
 	private final CargoRepository cargoRepository;
 	private final FuncionarioRepository funcionarioRepository;
 	private final UnidadeTrabalhoRepository unidadeTrabalhoRepository;
-	
+
+	@Autowired
+	private  CrudUnidadeTrabalhoService unidadeTrabalhoService;
+
 	
 	public CrudFuncionarioService(FuncionarioRepository funcionarioRepository, 
-			CargoRepository cargoRepository, UnidadeTrabalhoRepository unidadeTrabalhoRepository) {
+			CargoRepository cargoRepository, UnidadeTrabalhoRepository unidadeTrabalhoRepository,CrudCargoService crudCargoService) {
 		this.cargoRepository = cargoRepository;
 		this.funcionarioRepository = funcionarioRepository;
 		this.unidadeTrabalhoRepository = unidadeTrabalhoRepository;
+		this.crudCargoService = crudCargoService;
+
+
 	}
 	
 	public void inicial(Scanner scanner) {
+
 		while(system) {
-			System.out.println("Qual acao de cargo deseja executar");
+			System.out.println("Qual acao de Funcionario deseja executar");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - Atualizar");
@@ -79,6 +87,7 @@ public class CrudFuncionarioService {
         System.out.println("Digite a data de contracao");
         String dataContratacao = scanner.next();
 
+		crudCargoService.listar();
         System.out.println("Digite o cargoId");
         Integer cargoId = scanner.nextInt();
 
@@ -89,6 +98,7 @@ public class CrudFuncionarioService {
         funcionario.setCpf(cpf);
         funcionario.setSalario(salario);
         funcionario.setDataContratacao(LocalDate.parse(dataContratacao, formatter));
+
         Optional<Cargo> cargo = cargoRepository.findById(cargoId);
         funcionario.setCargo(cargo.get());
         funcionario.setUnidadeTrabalhos(unidades);
@@ -98,20 +108,15 @@ public class CrudFuncionarioService {
 	}
 	
 	private List<UnidadeTrabalho> unidade(Scanner scanner) {
+		unidadeTrabalhoService.visualizar();
         Boolean isTrue = true;
         List<UnidadeTrabalho> unidades = new ArrayList<>();
-
-        while (isTrue) {
-            System.out.println("Digite o unidadeId (Para sair digite 0)");
+            System.out.println("Digite o unidadeId");
             Integer unidadeId = scanner.nextInt();
 
-            if(unidadeId != 0) {
                 Optional<UnidadeTrabalho> unidade = unidadeTrabalhoRepository.findById(unidadeId);
                 unidades.add(unidade.get());
-            } else {
-                isTrue = false;
-            }
-        }
+
 
         return unidades;
     }
@@ -132,6 +137,7 @@ public class CrudFuncionarioService {
         System.out.println("Digite a data de contracao");
         String dataContratacao = scanner.next();
 
+		crudCargoService.listar();
         System.out.println("Digite o cargoId");
         Integer cargoId = scanner.nextInt();
 

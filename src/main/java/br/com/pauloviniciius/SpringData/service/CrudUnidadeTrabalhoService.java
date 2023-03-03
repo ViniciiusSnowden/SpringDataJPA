@@ -20,7 +20,7 @@ public class CrudUnidadeTrabalhoService {
 	
 	public void inicial(Scanner scanner) {
 		while(system) {
-			System.out.println("Qual acao de cargo deseja executar");
+			System.out.println("Qual acao de Unidade de trabalho deseja executar");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - Atualizar");
@@ -85,7 +85,7 @@ public class CrudUnidadeTrabalhoService {
         System.out.println("Alterado");
 	}
 	
-	private void visualizar() {
+	public void visualizar() {
 		Iterable<UnidadeTrabalho> unidades = unidadeTrabalhoRepository.findAll();
 		unidades.forEach(unidade -> System.out.println(unidade));
 	}

@@ -2,6 +2,8 @@ package br.com.pauloviniciius.SpringData.service;
 
 import br.com.pauloviniciius.SpringData.orm.Cargo;
 import br.com.pauloviniciius.SpringData.repository.CargoRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +18,22 @@ public class CrudCargoService {
     public CrudCargoService(CargoRepository cargoRepository){
         this.cargoRepository = cargoRepository;
     }
+    public CrudCargoService(){
+    }
 
     public void pt(String msg){
         System.out.println(msg);
     }
 
-    public void inicial(){
+    public void inicial(Scanner scanner){
 
-        Scanner scanner = new Scanner(System.in);
         while(system){
             System.out.println("Qual ação você quer executar");
             System.out.println("0 - Sair");
-            System.out.println("1 - Cadastrar cargo");
-            System.out.println("2 - Atualizar cargo");
-            System.out.println("3 - Vizualizar cargos");
-            System.out.println("4 - Deletar cargo");
+            System.out.println("1 - Cadastrar ");
+            System.out.println("2 - Atualizar ");
+            System.out.println("3 - Vizualizar ");
+            System.out.println("4 - Deletar ");
 
             int action = scanner.nextInt();
 
@@ -47,7 +50,7 @@ public class CrudCargoService {
                 case 4:
                     deletar(scanner);
                 default:
-                    system = true;
+                    system = false;
                     break;
             };
         };
@@ -78,7 +81,7 @@ public class CrudCargoService {
         this.pt("Salvo");
     }
 
-    private void listar(){
+    public void listar(){
         Iterable<Cargo> cargos = cargoRepository.findAll();
         cargos.forEach(cargo -> pt(cargo.toString()));
     }

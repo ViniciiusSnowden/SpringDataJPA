@@ -31,4 +31,10 @@ public class Funcionario {
             inverseJoinColumns = { @JoinColumn(name = "fk_unidade") })
     private List<UnidadeTrabalho> unidadeTrabalhos;
 
+    @Override
+    public String toString() {
+        return "Funcionario: " + "id:" + id + "| nome:'" + nome + "| cpf:" + cpf + "| salario:" + salario
+                + "| dataContratacao:" + dataContratacao + "| cargo:" + cargo.getDescricao();
+    }
+
 }

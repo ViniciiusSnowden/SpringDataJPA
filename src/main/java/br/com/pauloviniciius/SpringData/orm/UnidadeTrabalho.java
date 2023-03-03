@@ -20,6 +20,14 @@ public class UnidadeTrabalho {
     private String endereco;
     @ManyToMany(mappedBy = "unidadeTrabalhos", fetch = FetchType.EAGER)
     private List<Funcionario> funcionarios;
+
+
+    @Override
+    public String toString() {
+        return "Unidades: " + "id:" + id +
+                "| descricao:" + descricao +
+                "| endereco:" + endereco;
+    }
 }
 
 
