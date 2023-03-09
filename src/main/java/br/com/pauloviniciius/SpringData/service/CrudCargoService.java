@@ -64,8 +64,11 @@ public class CrudCargoService {
          String descricao = scanner.next();
          Cargo cargo = new Cargo();
          cargo.setDescricao(descricao);
+
          cargoRepository.save(cargo);
+
          this.pt("Salvo");
+
     }
 
     private void atualizar(Scanner scanner){
