@@ -1,5 +1,6 @@
 package br.com.pauloviniciius.SpringData.repository;
 
+import br.com.pauloviniciius.SpringData.orm.DTO.FuncionarioDto;
 import br.com.pauloviniciius.SpringData.orm.Funcionario;
 import br.com.pauloviniciius.SpringData.orm.FuncionarioProjecao;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +22,9 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
     List<Funcionario> findDataContracacaoMaior(LocalDate data);
 
     @Query(value = "SELECT f.id , f.nome , f.salario FROM funcionario f", nativeQuery = true)
-    List<FuncionarioProjecao> findFuncionarioSalario();
+    List<FuncionarioProjecao> findFuncionarioSalarioNative();
+
+    @Query(value = "SELECT new br.com.pauloviniciius.SpringData.orm.DTO.FuncionarioDto(f.id, f.nome, f.salario) FROM Funcionario f")
+    List<FuncionarioDto> findFuncionarioSalario();
 
 }

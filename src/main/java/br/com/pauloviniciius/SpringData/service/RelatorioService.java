@@ -1,5 +1,6 @@
 package br.com.pauloviniciius.SpringData.service;
 
+import br.com.pauloviniciius.SpringData.orm.DTO.FuncionarioDto;
 import br.com.pauloviniciius.SpringData.orm.Funcionario;
 import br.com.pauloviniciius.SpringData.orm.FuncionarioProjecao;
 import br.com.pauloviniciius.SpringData.repository.FuncionarioRepository;
@@ -80,7 +81,7 @@ public class RelatorioService {
     }
 
     private void pesquisafunacionarioSalario(){
-        List<FuncionarioProjecao> list = funcionarioRepository.findFuncionarioSalario();
+        List<FuncionarioDto> list = funcionarioRepository.findFuncionarioSalario();
         list.forEach(f -> System.out.println("Funcionario: id: " + f.getId() + " Nome: "
                 +f.getNome() + " Salário: " + f.getSalario()));
     }
