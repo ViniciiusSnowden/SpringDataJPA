@@ -4,12 +4,13 @@ import br.com.pauloviniciius.SpringData.orm.DTO.FuncionarioDto;
 import br.com.pauloviniciius.SpringData.orm.Funcionario;
 import br.com.pauloviniciius.SpringData.orm.FuncionarioProjecao;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>, JpaSpecificationExecutor<Funcionario> {
     List<Funcionario> findByNome(String nome);
 
     //JPQL
