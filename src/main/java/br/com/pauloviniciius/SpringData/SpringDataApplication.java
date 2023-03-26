@@ -2,10 +2,7 @@ package br.com.pauloviniciius.SpringData;
 
 import br.com.pauloviniciius.SpringData.orm.Cargo;
 
-import br.com.pauloviniciius.SpringData.service.CrudCargoService;
-import br.com.pauloviniciius.SpringData.service.CrudFuncionarioService;
-import br.com.pauloviniciius.SpringData.service.CrudUnidadeTrabalhoService;
-import br.com.pauloviniciius.SpringData.service.RelatorioService;
+import br.com.pauloviniciius.SpringData.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +26,9 @@ public class SpringDataApplication implements CommandLineRunner {
 	@Autowired
 	private RelatorioService relatorioService;
 
+	@Autowired
+	private RelatorioFuncionarioDinamico relatorioFuncionarioDinamico;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDataApplication.class, args);
 	}
@@ -44,6 +44,7 @@ public class SpringDataApplication implements CommandLineRunner {
 			System.out.println("2 - Cargo");
 			System.out.println("3 - Unidade");
 			System.out.println("4 - Relatorio");
+			System.out.println("5 - Relatorio Dinamico");
 
 			Integer function = scanner.nextInt();
 
@@ -59,6 +60,9 @@ public class SpringDataApplication implements CommandLineRunner {
 					break;
 				case 4:
 					relatorioService.inicial(scanner);
+					break;
+				case 5:
+					relatorioFuncionarioDinamico.inicial(scanner);
 					break;
 				default:
 					System.out.println("Finalizando");
